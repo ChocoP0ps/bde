@@ -26,11 +26,11 @@
 			case "emailInvalid":
 				$regisError="L'adresse Email est invalide";
 				break;
-			case "usernameExist":
-				$regisError="Le pseudo est déjà utilisé";
-				break;
 			case "emailExist":
 				$regisError="L'adresse Email est déjà utilisé";
+				break;
+			case "imageInvalid":
+				$regisError="Image invalide";
 				break;
 		}
 	}
@@ -86,13 +86,13 @@
 										</div>
 									</div>
 								</form>
-								<form id="register-form" action="php/register.php" method="post" role="form" style="display: <?php if(isset($regisError)){echo "block"; }else{echo "none";} ?>;">
+								<form id="register-form" action="php/register.php" method="post" role="form" style="display: <?php if(isset($regisError)){echo "block"; }else{echo "none";} ?>;" enctype="multipart/form-data">
 									<?php if(isset($regisError)){echo '<div class="alert alert-danger">' . $regisError . "</div>"; } ?>
 									<div class="form-group">
-										<input type="text" name="nom" id="nom" tabindex="1" class="form-control <?php if(isset($regisError) && $regisError === "Le pseudo est déjà utilisé"){echo "error";} ?>" placeholder="Nom" value="">
+										<input type="text" name="nom" id="nom" tabindex="1" class="form-control" placeholder="Nom" value="">
 									</div>
 									<div class="form-group">
-										<input type="text" name="prenom" id="prenom" tabindex="1" class="form-control <?php if(isset($regisError) && $regisError === "Le pseudo est déjà utilisé"){echo "error";} ?>" placeholder="Prenom" value="">
+										<input type="text" name="prenom" id="prenom" tabindex="1" class="form-control" placeholder="Prenom" value="">
 									</div>
 									<div class="form-group">
 										<input type="email" name="email" id="email" tabindex="1" class="form-control <?php if(isset($regisError) && ( $regisError === "L'adresse Email est invalide" || $regisError === "L'adresse Email est déjà utilisé")){echo "error";} ?>" placeholder="Addresse Email" value="">
@@ -104,7 +104,7 @@
 										<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control <?php if(isset($regisError) && $regisError === "Les mots de passe sont différents"){echo "error";} ?>" placeholder="Confirmer le mot de passe">
 									</div>
 									<div class="form-group">
-										<input type="file" name="avatar" id="avatar" tabindex="2" class="form-control <?php if(isset($regisError) && $regisError === "Les mots de passe sont différents"){echo "error";} ?>" placeholder="Avatar">
+										<input type="file" name="avatar" id="avatar" tabindex="2" class="form-control <?php if(isset($regisError) && $regisError === "Image invalide"){echo "error";} ?>" placeholder="Avatar">
 									</div>
 									<div class="form-group">
 										<div class="row">

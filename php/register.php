@@ -7,7 +7,6 @@ $verifPass = $_POST['confirm-password'];
 $avatar = $_FILES['avatar'];
 $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 $extension_upload = strtolower(  substr(  strrchr($avatar['name'], '.')  ,1)  );
-$image_sizes = getimagesize($avatar['tmp_name']);
 
 if(strcmp($password, $verifPass))
 {
@@ -57,7 +56,7 @@ else
 
 		move_uploaded_file($avatar['tmp_name'], $path);
 
-		$sqlPath = "avatar/" . $id . "." . $extension_upload;
+		$sqlPath = "image/avatar/" . $id . "." . $extension_upload;
 
 		$bdd->exec("INSERT INTO `image`(`ID_USERS`, `PATH_IMAGE`) VALUES (" . $id . ", '" . $sqlPath . "')");
 

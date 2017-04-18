@@ -36,7 +36,7 @@ if($nameExist)
 {
 	if($goodPass)
 	{
-		setcookie("user", $id,time()+86400, null, null, false, true);
+		setcookie("user", $id,false,"/",false);
 		header("location:../list_activities.html");
 	}
 	else

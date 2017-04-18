@@ -11,6 +11,9 @@
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/datepicker.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/base.css" />
+	<link rel="stylesheet" type="text/css" href="css/clean.css" />
 </head>
 <body>
 	<header>
@@ -123,9 +126,9 @@
 									</ul>
 								</div>
 								<div class="tab-pane" role="tabpanel" id="step3">
-									<h3>Step 3</h3>
-									<p>This is step 3</p>
-									<ul class="list-inline pull-right">
+									<h3>Date</h3>
+									<p class="col-md-12 col-md-offset-3" id="simple-calendar"></p>
+									<ul class="list-inline pull-right" id="list-btn-cal">
 										<li><button type="button" class="btn btn-default prev-step">Précédent</button></li>
 										<li><button type="button" class="btn btn-primary btn-info-full next-step">Sauvegarder et continuer</button></li>
 									</ul>
@@ -179,7 +182,14 @@
 				prevTab($active);
 
 			});
+
+			$('#simple-calendar').DatePicker({
+				mode: 'multiple',
+				inline: true,
+				date: new Date()
+			});
 		});
+		console.log($('#simple-calendar').DatePickerGetDate());
 
 		function nextTab(elem) {
 			$(elem).next().find('a[data-toggle="tab"]').click();

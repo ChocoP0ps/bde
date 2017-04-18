@@ -3,16 +3,16 @@
     background: #fff;
 }
 
-    .wizard .nav-tabs {
-        position: relative;
-        margin: 40px auto;
-        margin-bottom: 0;
-        border-bottom-color: #e0e0e0;
-    }
+.wizard .nav-tabs {
+    position: relative;
+    margin: 40px auto;
+    margin-bottom: 0;
+    border-bottom-color: #e0e0e0;
+}
 
-    .wizard > div.wizard-inner {
-        position: relative;
-    }
+.wizard > div.wizard-inner {
+    position: relative;
+}
 
 .connecting-line {
     height: 2px;
@@ -99,9 +99,9 @@ span.round-tab:hover {
     padding: 0;
 }
 
-    .wizard .nav-tabs > li a:hover {
-        background: transparent;
-    }
+.wizard .nav-tabs > li a:hover {
+    background: transparent;
+}
 
 .wizard .tab-pane {
     position: relative;
@@ -110,6 +110,23 @@ span.round-tab:hover {
 
 .wizard h3 {
     margin-top: 0;
+}
+
+.datepicker{
+    padding: 0px !important;
+    text-align: center !important;
+}
+
+table .datepickerFirstView{
+    margin-top: 30px;
+    width: 400px;
+    height: 400px;
+   font-size:16px;
+    text-align: center !important;
+}
+
+#list-btn-cal{
+    margin-top:400px;
 }
 
 @media( max-width : 585px ) {

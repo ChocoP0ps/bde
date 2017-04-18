@@ -60,7 +60,7 @@
 								<form id="login-form" action="php/login.php" method="post" role="form" style="display: <?php if(isset($regisError)){echo "none"; }else{echo "block";} ?>;">
 									<?php if(isset($logError)){echo '<div class="alert alert-danger">Mauvais pseudo ou mauvais mot de passe</div>'; } ?>
 									<div class="form-group">
-										<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+										<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Adresse Email">
 									</div>
 									<div class="form-group">
 										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">

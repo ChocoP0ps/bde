@@ -17,9 +17,9 @@ else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 {
 	die(header("location:../logreg.php?registerFailed=true&reason=emailInvalid"));
 }
-else if($avatar['error'] > 0 || $avatar['size'] > 10000000 || !in_array($extension_upload,$extensions_valides) || $image_sizes[0] != 180 || $image_sizes[1] != 180)
+else if($avatar['error'] > 0 || $avatar['size'] > 10000000 || !in_array($extension_upload,$extensions_valides))
 {
-	die(header("location:../logreg.php?registerFailed=true&reason=imageInvalid" . $info));
+	die(header("location:../logreg.php?registerFailed=true&reason=imageInvalid"));
 }
 else
 {

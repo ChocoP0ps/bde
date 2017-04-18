@@ -41,12 +41,12 @@ if($nameExist)
 	}
 	else
 	{
-		die(header("location:../logreg.php?loginFailed=true&md=" . md5($password)));
+		die(header("location:../logreg.php?loginFailed=mdp"));
 	}
 }
 else
 {
-	die(header("location:../logreg.php?loginFailed=true"));
+	die(header("location:../logreg.php?loginFailed=email"));
 }
 
 ?>

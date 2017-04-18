@@ -21,22 +21,22 @@
 		switch($_GET['reason'])
 		{
 			case "passwordDifferent":
-				$regisError="Les mots de passe sont différents";
-				break;
+			$regisError="Les mots de passe sont différents";
+			break;
 			case "emailInvalid":
-				$regisError="L'adresse Email est invalide";
-				break;
+			$regisError="L'adresse Email est invalide";
+			break;
 			case "emailExist":
-				$regisError="L'adresse Email est déjà utilisé";
-				break;
+			$regisError="L'adresse Email est déjà utilisé";
+			break;
 			case "imageInvalid":
-				$regisError="Image invalide";
-				break;
+			$regisError="Image invalide";
+			break;
 		}
 	}
-	else if(isset( $_GET['loginFailed']) && $_GET['loginFailed'])
+	else if(isset( $_GET['loginFailed']))
 	{
-		$logError=true;
+		$logError=$_GET['loginFailed'];
 	}
 	?>
 	<div class="container">
@@ -58,12 +58,18 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form id="login-form" action="php/login.php" method="post" role="form" style="display: <?php if(isset($regisError)){echo "none"; }else{echo "block";} ?>;">
-									<?php if(isset($logError)){echo '<div class="alert alert-danger">Mauvais pseudo ou mauvais mot de passe</div>'; } ?>
+									<?php if(isset($logError))
+									{
+										if($logError == "mdp")
+											echo '<div class="alert alert-danger">Mot de passe incorrecte</div>';
+										else if($logError == "email")
+											echo '<div class="alert alert-danger">Adresse email inexistante</div>';
+									} ?>
 									<div class="form-group">
-										<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Adresse Email">
+										<input type="text" name="email" id="email" tabindex="1" class="form-control <?php if(isset($logError)) { if($logError == "email"){echo "error";} } ?>" placeholder="Adresse Email">
 									</div>
 									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										<input type="password" name="password" id="password" tabindex="2" class="form-control <?php if(isset($logError)) { if($logError == "mdp"){echo "error";} } ?>" placeholder="Password">
 									</div>
 									<div class="form-group text-center">
 										<input type="checkbox" tabindex="3" class="" name="remember" id="remember">

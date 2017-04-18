@@ -5,42 +5,54 @@ $extension_upload = strtolower(  substr(  strrchr($picture['name'], '.')  ,1)  )
 $title = $_POST['title'];
 $comment = $_POST['comment'];
 $idact = $_POST['idact'];
+echo $comment;
 
+var_dump($_POST);
+var_dump($_FILES);
 
 if($picture['error'] > 0 || $picture['size'] > 10000000 || !in_array($extension_upload,$extensions_valides))
 {
-	var_dump($_FILES);
-	var_dump($_POST);
-	//die(header("location:../oldactivity.php?idact=" . $idact ."&error" . $output));
+	die(header("location:../oldactivity.php?idact=" . $idact ."&error" . $output));
 }
 
-$path="C:\wamp64\www\bde\image\\" . $picture['name'];
+$counter = 0;
+
+$path="C:\wamp64\www\bde\image\\" . $idact . $counter . "." . $extension_upload;
+
+while(file_exists($path)) {
+	$counter++;
+	$path="C:\wamp64\www\bde\image\\" . $idact . $counter . "." . $extension_upload;
+};
 
 move_uploaded_file($picture['tmp_name'], $path);
 
-$sqlPath = "image/" . $picture['name'];
+$sqlPath = "image/" . $idact . $counter . "." . $extension_upload;
 
 $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdebdd;charset=utf8', 'root', '');
-$stmt = $bdd->prepare("INSERT INTO `image`(`ID_USERS`, `PATH_IMAGE`, `Title`) VALUES (:iduser,:pathimg,:title)");
-$stmt->bindValue(':iduser', $_COOKIE['user']);
+$stmt = $bdd->prepare("INSERT INTO `image`(`PATH_IMAGE`, `Title`) VALUES (:pathimg,:title)");
 $stmt->bindValue(':pathimg', $sqlPath);
 $stmt->bindValue(':title', $title);
 $stmt->execute();
 $idImage = $bdd->lastInsertId();
+echo $idImage;
+$stmt->closeCursor();
 
 $stmt = $bdd->prepare("INSERT INTO `photo`(`ID_ACTIVITY`, `ID_IMAGE`, `IS_COUVERTURE`, `LIKES`) VALUES (:idact,:idimg,:iscouv, 0)");
 $stmt->bindValue(':idact', $idact);
 $stmt->bindValue(':idimg', $idImage);
-$stmt->bindValue(':iscouv', false);
+$stmt->bindValue(':iscouv', 0);
 $stmt->execute();
+$stmt->closeCursor();
 
-if($comment =! "")
+if($comment != "")
 {
 	$stmt = $bdd->prepare("INSERT INTO `comment`(`ID_IMAGE`, `ID_USER`, `COMMENTAIRE`) VALUES (:idimg,:iduser,:comment)");
 	$stmt->bindValue(':idimg', $idImage);
 	$stmt->bindValue(':iduser', $_COOKIE['user']);
+	echo $comment;
 	$stmt->bindValue(':comment', $comment);
 	$stmt->execute();
+	$stmt->closeCursor();
 }
-
+header("location:../oldactivity.php?idact=" . $idact);
 ?>

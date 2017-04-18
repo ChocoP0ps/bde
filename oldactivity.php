@@ -127,7 +127,7 @@
 								?>
 							</div> <!-- list-group / end -->
 						</div>
-						<form action="php/addPicture.php" id="add-form" name="add-form" method="post" role="form" style="display: none;" class="col-md-8 col-md-offset-2">
+						<form action="php/addPicture.php" id="add-form" name="add-form" method="post" role="form" style="display: none;" class="col-md-8 col-md-offset-2" enctype="multipart/form-data">
 							<div class="form-group">
 								<label for="comment">Titre:</label>
 								<input type="text" name="title" id="title" tabindex="1" class="form-control">
@@ -137,20 +137,17 @@
 								<textarea name="comment" class="form-control" rows="5" id="comment" form="add-form"></textarea>
 							</div>
 							<input type="hidden" name="idact" id="idact" value="<?= $_GET['idact'] ?>">
-							<div class="input-group image-preview">
-								<input type="text" class="form-control image-preview-filename" disabled="disabled"> <!-- don't give a name === doesn't send on POST/GET -->
-								<span class="input-group-btn">
-									<!-- image-preview-clear button -->
-									<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
-										<span class="glyphicon glyphicon-remove"></span> Clear
-									</button>
-									<!-- image-preview-input -->
-									<div class="btn btn-default image-preview-input">
-										<span class="glyphicon glyphicon-folder-open"></span>
-										<span class="image-preview-input-title">Browse</span>
-										<input type="file" accept="image/png, image/jpeg, image/gif" name="input-file-preview"/> <!-- rename it -->
-									</div>
-								</span>
+							<div class="form-group">
+								<label>Upload Image</label>
+								<div class="input-group">
+									<span class="input-group-btn">
+										<span class="btn btn-default btn-file">
+											Parcourir... <input type="file" name="imgInp" id="imgInp">
+										</span>
+									</span>
+									<input type="text" class="form-control" readonly>
+								</div>
+								<img id='img-upload'/>
 							</div>
 							<div class="form-group">
 								<div class="row">
@@ -167,17 +164,6 @@
 	</div>
 </div>
 <script>
-	$(document).on('click', '#close-preview', function(){ 
-		$('.image-preview').popover('hide');
-		$('.image-preview').hover(
-			function () {
-				$('.image-preview').popover('show');
-			}, 
-			function () {
-				$('.image-preview').popover('hide');
-			}
-			);    
-	});
 	$(document).ready( function() {
 		$(document).on('change', '.btn-file :file', function() {
 			var input = $(this),
@@ -228,49 +214,7 @@
 			$(this).addClass('active');
 			e.preventDefault();
 		});
-		var closebtn = $('<button/>', {
-			type:"button",
-			text: 'x',
-			id: 'close-preview',
-			style: 'font-size: initial;',
-		});
-		closebtn.attr("class","close pull-right");
-    // Set the popover default content
-    $('.image-preview').popover({
-    	trigger:'manual',
-    	html:true,
-    	title: "<strong>Preview</strong>"+$(closebtn)[0].outerHTML,
-    	content: "There's no image",
-    	placement:'bottom'
-    });
-    // Clear event
-    $('.image-preview-clear').click(function(){
-    	$('.image-preview').attr("data-content","").popover('hide');
-    	$('.image-preview-filename').val("");
-    	$('.image-preview-clear').hide();
-    	$('.image-preview-input input:file').val("");
-    	$(".image-preview-input-title").text("Browse"); 
-    }); 
-    // Create the preview image
-    $(".image-preview-input input:file").change(function (){     
-    	var img = $('<img/>', {
-    		id: 'dynamic',
-    		width:250,
-    		height:200
-    	});      
-    	var file = this.files[0];
-    	var reader = new FileReader();
-        // Set preview image into the popover data-content
-        reader.onload = function (e) {
-        	$(".image-preview-input-title").text("Change");
-        	$(".image-preview-clear").show();
-        	$(".image-preview-filename").val(file.name);            
-        	img.attr('src', e.target.result);
-        	$(".image-preview").attr("data-content",$(img)[0].outerHTML).popover("show");
-        }        
-        reader.readAsDataURL(file);
-    });  
-});
+	});
 </script>
 </body>
 </html>

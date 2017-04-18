@@ -26,11 +26,11 @@
 }
 
 body {
-font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-font-size: 14px;
-line-height: 1.42857143;
-color: #808080;
-background-color: #F1F1F1;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #808080;
+    background-color: #F1F1F1;
 }
 
 .navbar {
@@ -164,7 +164,7 @@ dd{
     background-color: #3D5DE0;
     border-color: #adadad;
     width: 33.3%;
-   
+
 }
 
 
@@ -309,25 +309,52 @@ th{
 #img-upload{
     width: 100%;
 }
-.image-preview-input {
-    position: relative;
-    overflow: hidden;
-    margin: 0px;    
-    color: #333;
-    background-color: #fff;
-    border-color: #ccc;    
+
+.colorBox>div
+{
+    width:30px;
+    height:30px;
+    background:url(/pics/color.png)
+    
 }
-.image-preview-input input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    cursor: pointer;
-    opacity: 0;
-    filter: alpha(opacity=0);
+
+#contentWrapper{
+    background:#fff;
+    padding:10px 10px 0;
+    box-shadow:3px 2px 5px rgba(0,0,0,.3);
+    margin:20px 0
 }
-.image-preview-input-title {
-    margin-left:2px;
+
+
+.btn-gray{
+    background-color:#ccc;
+    background-image:-moz-linear-gradient(#f4f4f4,#bcbcbc);
+    background-image:-webkit-linear-gradient(#f4f4f4,#bcbcbc);
+    background-image:-ms-linear-gradient(#f4f4f4,#bcbcbc);
+    border-color:#aaa;
+    color:#000
 }
+
+
+.btn-file{
+    position:relative
+}
+
+
+.btn-file input[type=file]{
+    position:absolute;
+    top:0;
+    right:0;
+    min-width:100%;
+    min-height:100%;
+    font-size:999px;
+    text-align:right;
+    filter:alpha(opacity=0);
+    opacity:0;
+    cursor:inherit;
+    display:block
+}
+
+input[readonly]{background-color:#fff!important;cursor:text!important}
+
+

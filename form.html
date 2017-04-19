@@ -12,41 +12,42 @@
 	crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="js/datepicker.js"></script>
+	<script type="text/javascript" src="js/date.format.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/base.css" />
 	<link rel="stylesheet" type="text/css" href="css/clean.css" />
 </head>
 <body>
 	<header>
-	<div class="container-fluid">	</div>
-	<nav class="navbar navbar-default" role="navigation">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Accueil</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="test"><a href="#">Boutique</a></li>
-				<li><a href="#">Activité</a></li>
-			</ul>
-			<div class="col-sm-3 col-md-3"> 
-				<form class="navbar-form" role="search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Recherchez une activité" name="q">
-						<div class="input-group-btn">
-							<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-						</div>
-					</div>
-				</form>
+		<div class="container-fluid">	</div>
+		<nav class="navbar navbar-default" role="navigation">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Accueil</a>
 			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a class="menu" href="#">Contacts</a></li>
-				<li><a href="#">S'enregistrer / Se connecter</a></li>
-			</ul>
-		</div><!-- /.navbar-collapse -->
-	</nav>
-</header>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="test"><a href="#">Boutique</a></li>
+					<li><a href="#">Activité</a></li>
+				</ul>
+				<div class="col-sm-3 col-md-3"> 
+					<form class="navbar-form" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Recherchez une activité" name="q">
+							<div class="input-group-btn">
+								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+							</div>
+						</div>
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a class="menu" href="#">Contacts</a></li>
+					<li><a href="#">S'enregistrer / Se connecter</a></li>
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</header>
 	<div class="container">
 		<div class="row">
 			<section>
@@ -88,59 +89,57 @@
 						</ul>
 					</div>
 
-					<form role="form">
+					<form role="form" action="php/addActivity.php" method="post" enctype="multipart/form-data" id="form-add-act">
 						<div class="tab-content">
-							<form id="register-form" action="php/register.php" method="post" role="form">
-								<div class="tab-pane active" role="tabpanel" id="step1">
-									<h3>Description de l'évènement</h3>
-									<div class="form-group">
-										<input type="text" name="name" id="name" tabindex="1" class="form-control" placeholder="Nom de l'évenement" value="">
-									</div>
-									<div class="form-group">
-										<input type="text" name="description" id="description" tabindex="1" class="form-control" placeholder="Description de l'évenement" value="">
-									</div>
-									<div class="form-group">
-										<input type="text" name="price" id="price" tabindex="2" class="form-control" placeholder="Prix de l'évenement">
-									</div>
-									<div class="form-group">
-										<input type="text" name="min" id="min" tabindex="2" class="form-control" placeholder="Nombre de participants minimum">
-									</div>
-									<div class="form-group">
-										<input type="text" name="required" id="required" tabindex="2" class="form-control" placeholder="Requis">
-									</div>
-									<div class="form-group">
-										<input type="text" name="age" id="age" tabindex="2" class="form-control" placeholder="Age minimum">
-									</div>
-									<ul class="list-inline pull-right">
-										<li><button type="button" class="btn btn-primary next-step">Sauvegarder et continuer</button></li>
-									</ul>
+							<div class="tab-pane active" role="tabpanel" id="step1">
+								<h3>Description de l'évènement</h3>
+								<div class="form-group">
+									<input type="text" name="title" id="title" tabindex="1" class="form-control" placeholder="Nom de l'évenement">
 								</div>
-								<div class="tab-pane" role="tabpanel" id="step2">
-									<h3>Image de couverture</h3>
-									<div class="form-group">
-										<input type="file" name="image" id="image" tabindex="2" class="form-control" placeholder="Image de couverture">
-									</div>
-									<ul class="list-inline pull-right">
-										<li><button type="button" class="btn btn-default prev-step">Précédent</button></li>
-										<li><button type="button" class="btn btn-primary next-step">Sauvegarder et continuer</button></li>
-									</ul>
+								<div class="form-group">
+									<input type="text" name="description" id="description" tabindex="1" class="form-control" placeholder="Description de l'évenement">
 								</div>
-								<div class="tab-pane" role="tabpanel" id="step3">
-									<h3>Date</h3>
-									<p class="col-md-12 col-md-offset-3" id="simple-calendar"></p>
-									<ul class="list-inline pull-right" id="list-btn-cal">
-										<li><button type="button" class="btn btn-default prev-step">Précédent</button></li>
-										<li><button type="button" class="btn btn-primary btn-info-full next-step">Sauvegarder et continuer</button></li>
-									</ul>
+								<div class="form-group">
+									<input type="text" name="price" id="price" tabindex="2" class="form-control" placeholder="Prix de l'évenement">
 								</div>
-							</form>
+								<div class="form-group">
+									<input type="text" name="min" id="min" tabindex="2" class="form-control" placeholder="Nombre de participants minimum">
+								</div>
+								<div class="form-group">
+									<input type="text" name="required" id="required" tabindex="2" class="form-control" placeholder="Requis">
+								</div>
+								<div class="form-group">
+									<input type="text" name="age" id="age" tabindex="2" class="form-control" placeholder="Age minimum">
+								</div>
+								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-primary next-step">Sauvegarder et continuer</button></li>
+								</ul>
+							</div>
+							<div class="tab-pane" role="tabpanel" id="step2">
+								<h3>Image de couverture</h3>
+								<div class="form-group">
+									<input type="file" name="image" id="image" tabindex="2" class="form-control" placeholder="Image de couverture">
+								</div>
+								<ul class="list-inline pull-right">
+									<li><button type="button" class="btn btn-default prev-step">Précédent</button></li>
+									<li><button type="button" class="btn btn-primary next-step">Sauvegarder et continuer</button></li>
+								</ul>
+							</div>
+							<div class="tab-pane" role="tabpanel" id="step3">
+								<h3>Date</h3>
+								<p class="col-md-12" id="simple-calendar"></p>
+								<ul class="list-inline pull-right" id="list-btn-cal">
+									<li><button type="button" class="btn btn-default prev-step">Précédent</button></li>
+									<li><button type="button" class="btn btn-primary btn-info-full next-step">Sauvegarder et continuer</button></li>
+								</ul>
+							</div>
 							<div class="tab-pane" role="tabpanel" id="complete">
 								<h3>Complete</h3>
 
 								<div class="form-group">
 									<div class="row">
 										<div class="col-sm-6 col-sm-offset-3">
-											<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+											<input type="submit" name="activity-submit" id="activity-submit" tabindex="4" class="form-control btn btn-register" value="Ajouter l'activité">
 										</div>
 									</div>
 								</div>
@@ -148,6 +147,7 @@
 							</div>
 							<div class="clearfix"></div>
 						</div>
+						<input type="hidden" name="date" id="date" value="">
 					</form>
 				</div>
 			</section>
@@ -189,7 +189,15 @@
 				date: new Date()
 			});
 		});
-		console.log($('#simple-calendar').DatePickerGetDate());
+
+		$('#form-add-act').submit(function(){
+			var arraydate = new Array();
+			arraydate = $('#simple-calendar').DatePickerGetDate()[0];
+			for (var i = 0; i < arraydate.length; i++) {
+				arraydate[i] = dateFormat(arraydate[i], "yyyy-mm-dd");
+			}
+			$( "#date" ).val( arraydate );
+		});
 
 		function nextTab(elem) {
 			$(elem).next().find('a[data-toggle="tab"]').click();

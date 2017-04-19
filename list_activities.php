@@ -83,18 +83,36 @@
 	</div>
 </div>
 <script>
+	$(document).ready( function() {
+		getActivities(-1);
+	});
+
+	function getActivities(state) {
+		console.log("etat : " + state);
+
+		$.ajax({
+			url: "php/getActivities.php",
+			data: { etat : state},
+			method: "GET",
+			success: function(msg){
+				console.log( "json : " + msg );
+			},
+			error: function(XMLHttpRequest, textStatus, errorThrown) {
+				console.log( "error : " + textStatus + " " + errorThrown );
+			}
+		});
+	}
+
+
 	$('.toggler').click(function() {
 		var tog = $(this);
 		var secondDiv = tog.parent().prev();
 		var firstDiv = secondDiv.prev();
 		firstDiv.children('p').toggleClass('hide');
 		secondDiv.toggleClass('hide');
-    //tog.parent().find('.first > p').toggleClass('hide');
-    //tog.parent().find('.second').toggleClass('hide');
-    //$('.first > .main').toggleClass('hide');
-    tog.toggleClass('fa fa-chevron-up fa fa-chevron-down');
-    return false;
-});
+		tog.toggleClass('fa fa-chevron-up fa fa-chevron-down');
+		return false;
+	});
 
 	$('.comsys').click(function() {
 		var togCmt = $(this);

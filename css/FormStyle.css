@@ -120,13 +120,13 @@ span.round-tab:hover {
 table .datepickerFirstView{
     margin-top: 30px;
     width: 400px;
-    height: 400px;
+    height: 300px;
    font-size:16px;
     text-align: center !important;
 }
 
 #list-btn-cal{
-    margin-top:400px;
+    margin-top:340px;
 }
 
 @media( max-width : 585px ) {
@@ -169,6 +169,11 @@ table .datepickerFirstView{
 	font-size: 20px;
 	
 
+}
+
+#simple-calendar{
+    width: 400px;
+    margin-left: 30%;
 }
 
 .logo {

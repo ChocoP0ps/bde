@@ -5,10 +5,6 @@ $extension_upload = strtolower(  substr(  strrchr($picture['name'], '.')  ,1)  )
 $title = $_POST['title'];
 $comment = $_POST['comment'];
 $idact = $_POST['idact'];
-echo $comment;
-
-var_dump($_POST);
-var_dump($_FILES);
 
 if($picture['error'] > 0 || $picture['size'] > 10000000 || !in_array($extension_upload,$extensions_valides))
 {
@@ -34,7 +30,6 @@ $stmt->bindValue(':pathimg', $sqlPath);
 $stmt->bindValue(':title', $title);
 $stmt->execute();
 $idImage = $bdd->lastInsertId();
-echo $idImage;
 $stmt->closeCursor();
 
 $stmt = $bdd->prepare("INSERT INTO `photo`(`ID_ACTIVITY`, `ID_IMAGE`, `IS_COUVERTURE`, `LIKES`) VALUES (:idact,:idimg,:iscouv, 0)");

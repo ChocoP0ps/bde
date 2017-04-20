@@ -15,37 +15,37 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
-	<header>
-			<div class="container-fluid">
-		<h1>BDE Cesi.Exia Aix</h1>
-	</div>
-	<nav class="navbar navbar-default" role="navigation">
-		<div class="navbar-header">
-			<a class="navbar-brand" href="#">Accueil</a>
+		<header>
+		<div class="container-fluid">
+			<h1>BDE Cesi.Exia Aix</h1>
 		</div>
-		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
-				<li class="test"><a href="#">Boutique</a></li>
-				<li><a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>
-					Activité</a></li>
-				</ul>
-				<div class="col-sm-3 col-md-3"> 
-					<form class="navbar-form" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Recherchez une activité" name="q">
-							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="index">Accueil</a>
+			</div>
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="test"><a href="shop">Boutique</a></li>
+					<li><a href="form"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+						Activité</a></li>
+					</ul>
+					<div class="col-sm-3 col-md-3"> 
+						<form class="navbar-form" role="search">
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="Recherchez une activité" name="q">
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+								</div>
 							</div>
-						</div>
-					</form>
+						</form>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a class="menu" href="contact.html">Contacts</a></li>
+						<li><a href="logreg.php">S'enregistrer / Se connecter</a></li>
+					</ul>
 				</div>
-				<ul class="nav navbar-nav navbar-right">
-					<li><a class="menu" href="#">Contacts</a></li>
-					<li><a href="#">S'enregistrer / Se connecter</a></li>
-				</ul>
-			</div><!-- /.navbar-collapse -->
-		</nav>
-	</header>
+			</nav>
+		</header>
 	<div class="container" style="margin-top: 70px;">
 		<div class="row form-group">
 			<div class="col-xs-12 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8" id="cont-act">

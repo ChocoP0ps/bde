@@ -6,9 +6,18 @@ $title = $_POST['title'];
 $comment = $_POST['comment'];
 $idact = $_POST['idact'];
 
+if(isset($_COOKIE['user']))
+{
+	$iduser = $_COOKIE['user'];
+}
+else
+{
+	die(header("location:../oldactivity.php?idact=" . $idact ."&error=notconnected"));
+}
+
 if($picture['error'] > 0 || $picture['size'] > 10000000 || !in_array($extension_upload,$extensions_valides))
 {
-	die(header("location:../oldactivity.php?idact=" . $idact ."&error" . $output));
+	die(header("location:../oldactivity.php?idact=" . $idact ."&error=picture"));
 }
 
 $counter = 0;

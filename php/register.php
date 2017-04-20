@@ -7,7 +7,6 @@ $verifPass = $_POST['confirm-password'];
 $avatar = $_FILES['avatar'];
 $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 $extension_upload = strtolower(  substr(  strrchr($avatar['name'], '.')  ,1)  );
-$image_sizes = getimagesize($avatar['tmp_name']);
 
 if(strcmp($password, $verifPass))
 {
@@ -17,9 +16,9 @@ else if(!filter_var($email, FILTER_VALIDATE_EMAIL))
 {
 	die(header("location:../logreg.php?registerFailed=true&reason=emailInvalid"));
 }
-else if($avatar['error'] > 0 || $avatar['size'] > 10000000 || !in_array($extension_upload,$extensions_valides) || $image_sizes[0] != 180 || $image_sizes[1] != 180)
+else if($avatar['error'] > 0 || $avatar['size'] > 10000000 || !in_array($extension_upload,$extensions_valides))
 {
-	die(header("location:../logreg.php?registerFailed=true&reason=imageInvalid" . $info));
+	die(header("location:../logreg.php?registerFailed=true&reason=imageInvalid"));
 }
 else
 {
@@ -57,7 +56,7 @@ else
 
 		move_uploaded_file($avatar['tmp_name'], $path);
 
-		$sqlPath = "avatar/" . $id . "." . $extension_upload;
+		$sqlPath = "image/avatar/" . $id . "." . $extension_upload;
 
 		$bdd->exec("INSERT INTO `image`(`ID_USERS`, `PATH_IMAGE`) VALUES (" . $id . ", '" . $sqlPath . "')");
 

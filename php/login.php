@@ -1,14 +1,21 @@
 <?php 
-$userName = $_POST['username'];
+$email = $_POST['email'];
 $password = $_POST['password'];
-$remember = $_POST['remember'];
+if(isset($_POST['remember']))
+{
+	$remember = $_POST['remember'];
+}
+else
+{
+	$remember = "off";
+}
 
 $nameExist = false;
 $goodPass = false;
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=daltehyondb;port=3306', 'visiteur', 'mdpvisiteur');
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdebdd;port=3306', 'root', '');
 
-$stmt = $bdd->prepare("SELECT * FROM user WHERE username = :username");
-$stmt->bindValue(':username', $userName);
+$stmt = $bdd->prepare("SELECT * FROM users WHERE EMAIL = :email");
+$stmt->bindValue(':email', $email);
 $id = 0;
 
 if( $stmt->execute() )
@@ -17,10 +24,10 @@ if( $stmt->execute() )
 	if($user != null)
 	{
 		$nameExist = true;
-		if( $user->userpassword === md5($password) )
+		if( $user->PASSWORD === md5($password) )
 		{
 			$goodPass = true;
-			$id = $user->iduser;
+			$id = $user->ID_USERS;
 		}
 	}
 }
@@ -29,19 +36,17 @@ if($nameExist)
 {
 	if($goodPass)
 	{
-		session_start();
-		ob_start();
-		$_SESSION['user'] = $id;
-		header("location:../menu.php");
+		setcookie("user", $id,false,"/",false);
+		header("location:../list_activities.html");
 	}
 	else
 	{
-		die(header("location:../index.php?loginFailed=true&md=" . md5($password)));
+		die(header("location:../logreg.php?loginFailed=mdp"));
 	}
 }
 else
 {
-	die(header("location:../index.php?loginFailed=true"));
+	die(header("location:../logreg.php?loginFailed=email"));
 }
 
 ?>

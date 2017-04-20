@@ -48,53 +48,64 @@
 	</header>
 	<div class="container" style="margin-top: 70px;">
 		<div class="row form-group">
-			<div class="col-xs-12 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8">
+			<div class="col-xs-12 col-md-offset-2 col-lg-offset-2 col-md-8 col-lg-8" id="cont-act">
 				<div class="panel-heading">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#tab1default" data-toggle="tab">Toutes</a></li>
-						<li><a href="#tab2default" data-toggle="tab">Passées</a></li>
-						<li><a href="#tab3default" data-toggle="tab">Confirmées</a></li>
-						<li><a href="#tab3default" data-toggle="tab">Proposées</a></li>
+						<li class="active"><a href="#tab1default" data-toggle="tab" id="all">Toutes</a></li>
+						<li><a href="#tab2default" data-toggle="tab" id="passed">Passées</a></li>
+						<li><a href="#tab3default" data-toggle="tab" id="confirmed">Confirmées</a></li>
+						<li><a href="#tab3default" data-toggle="tab" id="proposed">Proposées</a></li>
 					</ul>
-				</div>
-				<div class="panel panel-default">
-					<div class="panel-image">
-						<img src="http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_52d09387ae003_1.JPG" class="panel-image-preview" />
-						<h4>Summary</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lobortis nisl, vitae iaculis sapien. Phasellus ultrices gravida massa luctus ornare. Suspendisse blandit quam elit, eu imperdiet neque semper et.</p>
-					</div>
-					<div class="panel-footer clearfix">
-						<p>Participants: <span>15</span></p>
-					</div>
-				</div>
-				<hr>
-				<div class="panel panel-default">
-					<div class="panel-image">
-						<img src="http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_52cf9489095e8_1.JPG" class="panel-image-preview" />
-						<h4>Summary</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lobortis nisl, vitae iaculis sapien. Phasellus ultrices gravida massa luctus ornare. Suspendisse blandit quam elit, eu imperdiet neque semper et.</p>
-					</div>
-					<div class="panel-footer clearfix">
-						<p>Participants: <span>15</span></p>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <script>
+	$(document).ready( function() {
+		getActivities(-1);
+	});
+
+	$('#all').click(function(){
+		getActivities(-1);
+	});
+
+	$('#passed').click(function(){
+		getActivities(3);
+	});
+
+	$('#confirmed').click(function(){
+		getActivities(2);
+	});
+
+	$('#proposed').click(function(){
+		getActivities(1);
+	});
+
+	function getActivities(state) {
+		console.log("etat : " + state);
+		$.post( "php/getActivities.php", { etat : state }, function( data ) {
+			var activities = JSON.parse(data);
+			$('.panel-act').fadeOut(600, function() { 
+				$(this).remove(); 
+			});
+			for(var i = 0; i < activities.length; i++)
+			{
+				$("#cont-act").append($('<div class="panel panel-default panel-act"> <div class="panel-image"> <img src="' + activities[i].PATH_IMAGE + '" class="panel-image-preview" /> <h4>' + activities[i].TITRE + '</h4> <p>' + activities[i].DESCRIPTION + '</p> </div> <div class="panel-footer clearfix"> <p>Participants: <span>15</span></p> </div> </div>').hide().fadeIn(1200));
+			}
+		});
+	}
+
+
 	$('.toggler').click(function() {
 		var tog = $(this);
 		var secondDiv = tog.parent().prev();
 		var firstDiv = secondDiv.prev();
 		firstDiv.children('p').toggleClass('hide');
 		secondDiv.toggleClass('hide');
-    //tog.parent().find('.first > p').toggleClass('hide');
-    //tog.parent().find('.second').toggleClass('hide');
-    //$('.first > .main').toggleClass('hide');
-    tog.toggleClass('fa fa-chevron-up fa fa-chevron-down');
-    return false;
-});
+		tog.toggleClass('fa fa-chevron-up fa fa-chevron-down');
+		return false;
+	});
 
 	$('.comsys').click(function() {
 		var togCmt = $(this);

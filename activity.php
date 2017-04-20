@@ -151,7 +151,7 @@
 
 	<div class="container footer navbar-fixed-bottom">
 		<div class="row">
-			<button class="btn btn-danger btn-lg btn-block col-md-12 participate"><?php if($etat == 1){ echo "Voter"; }else{ echo "Participer"; } ?></button>
+			<button class="btn btn-danger btn-lg btn-block col-md-12 participate" id="send"><?php if($etat == 1){ echo "Voter"; }else{ echo "Participer"; } ?></button>
 		</div>
 	</div>
 	<script>
@@ -159,7 +159,7 @@
 		$(document).ready(function () {
 
 			$('#simple-calendar').DatePicker({
-				mode: 'single',
+				mode: 'multiple',
 				inline: true,
 				date: new Date()
 				<?php 
@@ -170,6 +170,19 @@
 				?>
 			});
 		});
+
+		$('#send').click(function(){
+			console.log("vote");
+			var arraydate = new Array();
+			arraydate = $('#simple-calendar').DatePickerGetDate()[0];
+			for (var i = 0; i < arraydate.length; i++) {
+				arraydate[i] = dateFormat(arraydate[i], "yyyy-mm-dd");
+			}
+			$.post( "php/vote.php", { idact : <?= $_GET['idact'] ?>, dates : arraydate, state : <?= $etat ?> }, function( data ) {
+				location.href = "index.html";
+			});
+		})
+
 	</script>
 </body>
 </html>

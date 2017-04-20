@@ -56,6 +56,12 @@
 	font-size: 14px;
 	/*color: rgb(100, 100, 100);*/
 }
+
+.panel-act>a, .panel-act>a:hover{
+  color: #000;
+  text-decoration: none;
+}
+
 .btn-hover {
   font-weight: normal;
   color: #333333;

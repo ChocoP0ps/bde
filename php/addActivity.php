@@ -7,9 +7,17 @@ $req = $_POST['required'];
 $age = $_POST['age'];
 $date = $_POST['date'];
 $couv = $_FILES['image'];
-$iduser = $_COOKIE['user'];
 $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png' );
 $extension_upload = strtolower(  substr(  strrchr($couv['name'], '.')  ,1)  );
+
+if(isset($_COOKIE['user']))
+{
+	$iduser = $_COOKIE['user'];
+}
+else
+{
+	die(header("location:../form.html?error=notconnected"));
+}
 
 $dates = explode(",", $date);
 
@@ -94,6 +102,13 @@ for($i = 0; $i < count($dates); $i++)
 	$stmt->closeCursor();
 }
 
-header("location:../list_activities.html");
+$stmt = $bdd->prepare("INSERT INTO `participation`(`ID_USERS`, `ID_ACTIVITY`, `IS_CREATEUR`) VALUES (:iduser, :idact, :creat)");
+$stmt->bindValue(':iduser', $iduser);
+$stmt->bindValue(':idact', $idact);
+$stmt->bindValue(':creat', true);
+$stmt->execute();
+$stmt->closeCursor();
+
+header("location:../index.html");
 
 ?>

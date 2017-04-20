@@ -158,17 +158,25 @@
 		
 		$(document).ready(function () {
 
-			$('#simple-calendar').DatePicker({
-				mode: 'single',
-				inline: true,
-				date: new Date()
-				<?php 
-				if($etat==2)
-				{
-					echo ", onChange: function() { $('#simple-calendar').DatePickerSetDate(new Date(), true); }";
-				}
-				?>
-			});
+			<?php 
+			if($etat==1)
+			{
+				echo "$('#simple-calendar').DatePicker({
+					mode: 'multiple',
+					inline: true,
+					date: new Date()
+				});";
+			}
+			else
+			{
+				echo "$('#simple-calendar').DatePicker({
+					mode: 'single',
+					inline: true,
+					date: new Date(),
+					onChange: function() { $('#simple-calendar').DatePickerSetDate(new Date(), true); }
+				});";
+			}
+			?>
 		});
 	</script>
 </body>

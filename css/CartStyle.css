@@ -29,3 +29,16 @@
 .input-group{
 	width: 666px;
 }
+
+a{
+	color:#c2242a;
+}
+
+.media-body{
+	padding-left: 10px;
+}
+
+.btn-success{
+	background-color:#c2242a ;
+	border-color:#c2242a;
+}
